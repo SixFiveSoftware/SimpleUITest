@@ -29,11 +29,21 @@ class SimpleUITestUITests: XCTestCase {
 
     func testShapeExistsAfterTappingAddShape() {
         
+        let app = XCUIApplication()
+        app.buttons["Add Shape"].tap()
+        let button = app.buttons["Button0"]
+        
+        XCTAssertTrue(button.exists)
+    }
+    
+    func testShapeDisappearsWhenTappingIt() {
         
         let app = XCUIApplication()
         app.buttons["Add Shape"].tap()
-        app.descendantsMatchingType(.Unknown).containingType(.Button, identifier:"Add Shape").childrenMatchingType(.Button).elementBoundByIndex(1).tap()
-
+        let button = app.buttons["Button0"]
+        button.tap()
         
+        XCTAssertFalse(button.exists)
+
     }
 }

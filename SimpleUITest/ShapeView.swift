@@ -60,4 +60,8 @@ class ShapeView: UIView {
         accessibilityTraits = UIAccessibilityTraitButton
     }
     
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        removeFromSuperview()
+    }
+    
 }
