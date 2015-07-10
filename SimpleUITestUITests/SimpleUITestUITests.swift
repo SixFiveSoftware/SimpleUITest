@@ -9,7 +9,9 @@
 import XCTest
 
 class SimpleUITestUITests: XCTestCase {
-        
+    
+    var app: XCUIApplication!
+    
     override func setUp() {
         super.setUp()
         
@@ -18,7 +20,9 @@ class SimpleUITestUITests: XCTestCase {
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        XCUIApplication().launch()
+        
+        app = XCUIApplication()
+        app.launch()
     }
     
     override func tearDown() {
@@ -29,7 +33,6 @@ class SimpleUITestUITests: XCTestCase {
 
     func testShapeExistsAfterTappingAddShape() {
         
-        let app = XCUIApplication()
         app.buttons["Add Shape"].tap()
         let button = app.buttons["Button0"]
         
@@ -38,12 +41,22 @@ class SimpleUITestUITests: XCTestCase {
     
     func testShapeDisappearsWhenTappingIt() {
         
-        let app = XCUIApplication()
         app.buttons["Add Shape"].tap()
         let button = app.buttons["Button0"]
         button.tap()
         
         XCTAssertFalse(button.exists)
 
+    }
+    
+    func testThreeCellsInTable() {
+        
+        app.buttons["Show Cells"].tap()
+        app.tables.staticTexts["0"].tap()
+        
+        let count = app.tables.cells.count
+        
+        XCTAssertEqual(count, 3)
+        
     }
 }
