@@ -36,6 +36,12 @@ enum ShapeColor: Int {
 
 class ShapeView: UIView {
     
+    var viewCounter: Int = 0 {
+        didSet {
+            accessibilityLabel = "Button\(viewCounter)"
+        }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         initialize()
@@ -49,6 +55,9 @@ class ShapeView: UIView {
     private func initialize() {
         let rnd = Int(arc4random_uniform(6))
         backgroundColor = ShapeColor(rawValue: rnd)?.color
+        
+        isAccessibilityElement = true
+        accessibilityTraits = UIAccessibilityTraitButton
     }
     
 }

@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var viewCounter = 0
+    
     @IBAction func addShapeButtonTapped(sender: AnyObject) {
         let maxX = UInt32(view.frame.size.width) - 100
         let maxY = UInt32(view.frame.size.height) - 100
@@ -20,6 +22,7 @@ class ViewController: UIViewController {
         let frame = CGRect(x: rndXOrigin, y: rndYOrigin, width: 100, height: 100)
         
         let shape = ShapeView(frame: frame)
+        shape.viewCounter = viewCounter++
         
         view.addSubview(shape)
     }
